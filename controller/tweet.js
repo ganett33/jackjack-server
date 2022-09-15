@@ -20,7 +20,7 @@ export async function getTweet(req, res, next) {
 
 export async function createTweet(req, res, next) {
   const { text, username, name } = req.body;
-  const tweet = await tweetRepository.create();
+  const tweet = await tweetRepository.create(text, name, username);
   res.status(201).json();
 }
 
