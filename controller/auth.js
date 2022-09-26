@@ -36,7 +36,7 @@ export async function login(req, res) {
 
   const isValidPassword = await bcrpyt.compare(password, user.password);
   if (!isValidPassword) {
-    return res.status(401).json({ message: "Invalid user or password" });
+    return res.status(401).json({ message: "Invalid user or password" }); // need the passwords
   }
   const token = createJwtToken(user.id);
   res.status(200).json({ token, username });

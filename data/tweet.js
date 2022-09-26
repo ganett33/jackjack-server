@@ -3,15 +3,21 @@ let tweets = [
   {
     id: "1",
     text: "Go keep going!!",
-    createdAt: new Date().toString,
+    createdAt: new Date().toString(),
     userId: "1",
   },
 
   {
     id: "2",
     text: "Hello",
-    createdAt: new Date().toString,
+    createdAt: new Date().toString(),
     userId: "1",
+  },
+  {
+    id: "3",
+    text: "lorem ipsum 21 33123",
+    createdAt: new Date().toString(),
+    userId: "2",
   },
 ];
 

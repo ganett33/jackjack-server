@@ -5,7 +5,15 @@ let users = [
     username: "bob",
     password: "$2b$10$JpUGy1Mz387Ab31h1wYb9e1Nej70SH6l7KyoLCuk9N65KOIXvPemq",
     name: "Bob",
-    email: "bob@mail.com",
+    email: "bob@gmail.com",
+    url: "https://lh3.googleusercontent.com/a-/ACNPEu-xE55P6Hi0h2BVjanv1b410Gy7OC0eCCetqitKWw=s96-c-rg-br100",
+  },
+  {
+    id: "2",
+    username: "jb",
+    password: "$2b$10$JpUGy1Mz387Ab31h1wYb9e1Nej70SH6l7KyoLCuk9N65KOIXvPemq",
+    name: "Jongbo",
+    email: "jb@gmail.com",
     url: "https://lh3.googleusercontent.com/a-/ACNPEu-xE55P6Hi0h2BVjanv1b410Gy7OC0eCCetqitKWw=s96-c-rg-br100",
   },
 ];
