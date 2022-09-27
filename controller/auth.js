@@ -3,11 +3,7 @@ import bcrpyt from "bcrypt";
 import {} from "express-async-errors";
 import * as userRepository from "../data/auth.js";
 import { json } from "express";
-
-// TODO: Make it secure!
-const jwtSecretKey = "jS#0epiHS6Z5QLN%L4A480jt@ghaBxbk";
-const jwtExpiresInDays = "2d";
-const bcrpytSaltRounds = 12;
+import { config } from "../config.js";
 
 export async function signup(req, res) {
   const { username, password, name, email, url } = req.body;
@@ -15,7 +11,7 @@ export async function signup(req, res) {
   if (found) {
     return res.status(409).json({ message: `${username} already exists` });
   }
-  const hashed = await bcrpyt.hash(password, bcrpytSaltRounds);
+  const hashed = await bcrpyt.hash(password, config.bcrypt.saltRounds);
   const userId = await userRepository.createUser({
     username,
     password: hashed,
@@ -43,7 +39,10 @@ export async function login(req, res) {
 }
 
 function createJwtToken(id) {
-  return jwt.sign({ id }, jwtSecretKey, { expiresIn: jwtExpiresInDays });
+  console.log(config.jwt.secretKey);
+  return jwt.sign({ id }, config.jwt.secretKey, {
+    expiresIn: config.jwt.expiresInSec,
+  });
 }
 
 export async function me(req, res, next) {
