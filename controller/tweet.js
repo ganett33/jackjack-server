@@ -23,7 +23,7 @@ export async function createTweet(req, res, next) {
   const { text } = req.body;
   const tweet = await tweetRepository.create(text, req.userId);
   res.status(201).json(tweet);
-  getSocketIO().emit(("tweets", tweet));
+  getSocketIO().emit("tweets", tweet);
 }
 
 export async function updateTweet(req, res, next) {
@@ -34,7 +34,7 @@ export async function updateTweet(req, res, next) {
     return res.status(404).json({ message: `Tweet not found: ${id}` });
   }
   if (tweet.userId !== req.userId) {
-    return res.sendStatus(403); // no authorization user
+    return res.sendStatus(403);
   }
   const updated = await tweetRepository.update(id, text);
   res.status(200).json(updated);

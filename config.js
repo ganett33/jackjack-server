@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+
 dotenv.config();
 
 function required(key, defaultValue = undefined) {
@@ -12,12 +13,19 @@ function required(key, defaultValue = undefined) {
 export const config = {
   jwt: {
     secretKey: required("JWT_SECRET"),
-    expiresInSec: parseInt(required("JWT_EXPIRES_SEC", 84600)), // adding default value
+    expiresInSec: parseInt(required("JWT_EXPIRES_SEC", 86400)), // adding default value
   },
   bcrypt: {
     saltRounds: parseInt(required("BCRYPT_SALT_ROUNDS", 12)), // adding default value
   },
   host: {
     port: parseInt(required("HOST_PORT", 3000)),
+  },
+
+  db: {
+    host: required("DB_HOST"),
+    user: required("DB_USER"),
+    database: required("DB_DATABASE"),
+    password: required("DB_PASSWORD"),
   },
 };
