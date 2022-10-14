@@ -1,33 +1,45 @@
-//abcd1234: $2b$10$JpUGy1Mz387Ab31h1wYb9e1Nej70SH6l7KyoLCuk9N65KOIXvPemq
-let users = [
+import SQ from "sequelize";
+import { sequelize } from "../db/database.js";
+const DataTypes = SQ.DataTypes;
+
+export const User = sequelize.define(
+  "user",
   {
-    id: "1",
-    username: "bob",
-    password: "$2b$10$JpUGy1Mz387Ab31h1wYb9e1Nej70SH6l7KyoLCuk9N65KOIXvPemq",
-    name: "Bob",
-    email: "bob@gmail.com",
-    url: "https://lh3.googleusercontent.com/a-/ACNPEu-xE55P6Hi0h2BVjanv1b410Gy7OC0eCCetqitKWw=s96-c-rg-br100",
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
+    },
+    username: {
+      type: DataTypes.STRING(45),
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+    },
+    url: DataTypes.TEXT,
   },
-  {
-    id: "2",
-    username: "jb",
-    password: "$2b$10$JpUGy1Mz387Ab31h1wYb9e1Nej70SH6l7KyoLCuk9N65KOIXvPemq",
-    name: "Jongbo",
-    email: "jb@gmail.com",
-    url: "https://lh3.googleusercontent.com/a-/ACNPEu-xE55P6Hi0h2BVjanv1b410Gy7OC0eCCetqitKWw=s96-c-rg-br100",
-  },
-];
+  { timestamps: false }
+);
 
 export async function findByUsername(username) {
-  return users.find((user) => user.username === username);
+  return User.findOne({ where: { username } });
 }
 
 export async function findById(id) {
-  return users.find((user) => user.id === id);
+  return User.findByPk(id);
 }
 
 export async function createUser(user) {
-  const created = { ...user, id: Date.now().toString() };
-  users.push(created);
-  return created.id;
+  return User.create(user).then((data) => data.dataValues.id);
 }
